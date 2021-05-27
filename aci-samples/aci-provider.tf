@@ -9,7 +9,7 @@ terraform {
 }
 
 locals {
-  apic = "YourAPIC_IP_or_FQDN_GoesHere"  # IP or FQDN of APIC
+  apic = "PutYourIPAddresHere"  # IP or FQDN of APIC
   cert_name = "Terraform" # This is the name of the certificate found within the APIC user configuration
   private_key = "./certificates/terraform.key"
   user_name = "terraform" # The account used to access the APIC.
@@ -28,6 +28,7 @@ provider "aci" {
   insecure = true
 }
 
+# Takes a backup of the APIC. We do this here because we want it to happen before any other changes. 
 resource "aci_rest" "snapshot" {
   path = "/api/mo/uni/fabric/configexp-${timestamp()}.json"
   class_name = "configExportP"
