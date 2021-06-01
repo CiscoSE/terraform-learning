@@ -2,18 +2,18 @@ locals{
     stateful = "no"
 }
 
-resource "aci_contract" "ICMP" {
+resource "aci_contract" "Demo1-Demo2-outbound" {
     tenant_dn = local.tenant_id
     name      = "Demo1-Demo2-outbound"
     scope     = "tenant"
-    filter {
-        filter_name = "allow_icmp"
-        description = "Demo ICMP Filter"
-        filter_entry {
-            filter_entry_name = "icmp"
-            ether_t     = "ip"
-            prot     = "icmp"
-            stateful = local.stateful
-        }
-    }
+    annotation  = "tag_contract"
+    name_alias  = "alias_contract"
+}
+
+resource "aci_contract_subject" "Demo1-Demo2-outbound-subject"{
+    contract_dn = "${aci_contract.Demo1-Demo2-outbound.id}"
+    name        = "Demo_Subject"
+    cons_match_t  = "AtleastOne"
+    prov_match_t  = "AtleastOne"
+    relation_vz_rs_subj_filt_att = ["${aci_filter.allow_icmp.id}"]
 }

@@ -39,3 +39,15 @@ resource "aci_filter_entry" "iperf" {
     stateful    = local.stateful
 }
 
+resource "aci_filter" "allow_icmp" {
+    name        = "allow_icmp"
+    tenant_dn   = "${local.tenant_id}"
+}
+
+resource "aci_filter_entry" "icmp" {
+    name        = "icmp"
+    filter_dn   = "${aci_filter.allow_icmp.id}"
+    ether_t     = "ip"
+    prot        = "icmp"
+    stateful    = local.stateful
+}
