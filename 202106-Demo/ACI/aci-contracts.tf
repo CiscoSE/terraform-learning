@@ -2,7 +2,7 @@ locals{
     stateful = "no"
 }
 
-resource "aci_contract" "IPERF" {
+resource "aci_contract" "ICMP" {
     tenant_dn = local.tenant_id
     name      = "Demo1-Demo2-outbound"
     scope     = "tenant"
