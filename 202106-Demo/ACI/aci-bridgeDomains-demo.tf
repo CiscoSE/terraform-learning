@@ -1,9 +1,3 @@
-locals{
-  subnet_75 = "172.16.75.1/24"
-  l3_out    = "uni/tn-common/out-AJ430-LabExt"
-  #l3_out    = "uni/tn-common/out-AJ430-LabExt/instP-AJ430-ExtOut"
-
-}
 
 #Create the Bridge domain using the unenforced VRF
 resource "aci_bridge_domain" "Demo-BD-75" {

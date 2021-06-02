@@ -1,12 +1,8 @@
-locals {
-  vmm_domain_dn = "uni/vmmp-VMware/dom-AJ430_APIC"
 
-}
 resource "aci_application_epg" "demo_epg1" {
   application_profile_dn    = "${aci_application_profile.Test-App.id}"
   relation_fv_rs_bd         = "${aci_bridge_domain.Demo-BD-75.id}"
   name                      = "demo_epg1"
-  annotation                = "tag_epg"
   exception_tag             = "0"
   flood_on_encap            = "disabled"
   fwd_ctrl                  = "none"
@@ -32,7 +28,6 @@ resource "aci_application_epg" "demo_epg2" {
   application_profile_dn    = "${aci_application_profile.Test-App.id}"
   relation_fv_rs_bd         = "${aci_bridge_domain.Demo-BD-75.id}"
   name                      = "demo_epg2"
-  annotation                = "tag_epg"
   exception_tag             = "0"
   flood_on_encap            = "disabled"
   fwd_ctrl                  = "none"
@@ -54,3 +49,4 @@ resource "aci_epg_to_domain" "demo_epg2_domain" {
   vmm_forged_transmits  = "reject"
   vmm_mac_changes       = "accept"
 }
+
