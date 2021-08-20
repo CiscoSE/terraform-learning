@@ -43,10 +43,19 @@ resource "aci_lacp_policy" "LACP_active" {
   mode        = "active"
 }
 
-resource "aci_lacp_policy" "LACP_activei_ns" {
+resource "aci_lacp_policy" "LACP_active_ns" {
   name        = local.LACP_active_ns_name
   ctrl        = ["load-defer", "graceful-conv"]
   max_links   = "16"
   min_links   = "1"
   mode        = "active"
 }
+
+resource "aci_lacp_policy" "LACP_on" {
+  name        = local.LACP_on_name
+  ctrl        = ["load-defer", "graceful-conv"]
+  max_links   = "16"
+  min_links   = "1"
+  mode        = "active"
+}
+
