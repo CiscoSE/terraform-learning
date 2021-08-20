@@ -35,17 +35,17 @@ variable "user_name" {
 }
 
 variable "vmm_domain_dn" {
-  name        = ""
+  default        = ""
   description = "The DN of your VMWare VMM Domain"
 }
 
 variable "subnet1" {
-  name        = ""
+  default        = ""
   description = "This subnet is assigned to the bridge domain"
 }
 
 variable "l3_out" {
-  name        = ""
+  default        = ""
   description = "The DN of the L3 out that you want to associate with the Bridge Domain"
 }
 
@@ -71,19 +71,6 @@ locals {
   vrf1_name   = "demo-VRF-unenforced"
   vrf2_name   = "demo-VRF-enforced"
   bd1_name     = "Demo-BD-75"
-}
-
-# Use the provider to assigne credentials. We use these for everything going forward.
-provider "aci" {
-  # This is the user name in ACI (usually a local users)
-  username = local.user_name
-  # The private key should be in a file on the same system referenced by path
-  private_key = local.private_key
-  # The cert name is the name assigned in ACI / Admin / AAA / Users / <User Name> / User Certificate 
-  cert_name = local.cert_name
-  # The URL for ACI
-  url      = "https://${local.apic}"
-  insecure = true
 }
 
 # Takes a backup of the APIC. We do this here because we want it to happen before any other changes. 
