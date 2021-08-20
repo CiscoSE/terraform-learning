@@ -8,17 +8,62 @@ terraform {
   }
 }
 
-locals {
-  # Most of these need to be changed for this to work.
-  apic = "10.82.6.193"  # IP or FQDN of APIC
-  cert_name = "Terraform" # This is the name of the certificate found within the APIC user configuration
-  private_key = "./certificates/terraform.key"
-  user_name = "terraform" # The account used to access the APIC.
-  vmm_domain_dn = "uni/vmmp-VMware/dom-AJ430_APIC" #This needs to be the DN of your VMWare VMM Domain
-  subnet1 = "172.16.75.1/24" # This subnet will be assigned to bridge domain
-  l3_out    = "uni/tn-common/out-AJ430-LabExt" # The DN of the L3 out that you want associated in the Bridge Domain 
+variable "apic" {
+  default     = ""
+  description = "IP or FQDN of the APIC"
+}
 
-  #The following should not need to be changed to make this work
+variable "cert_name" {
+  default     = ""
+  description = "This is the name of the certificate as configured in the APIC GUI under the users AAA configuration"
+}
+
+variable "private_key" {
+  default     = ""
+  description = "The location of the private key file that maps to the above named certificate."
+  /*
+  It is really important that you understand the relationship between the private key and the certifiate name.
+  The public key is copied into the AAA configuration for a user and is given a name. The private key
+  must be accessible to terraform so that it can decrypt information received from the APIC, which is encrypted
+  using the public key associated with the account.
+  */
+}
+
+variable "user_name" {
+  default     = ""
+  description = "The user account used to log into the APIC"
+}
+
+variable "vmm_domain_dn" {
+  name        = ""
+  description = "The DN of your VMWare VMM Domain"
+}
+
+variable "subnet1" {
+  name        = ""
+  description = "This subnet is assigned to the bridge domain"
+}
+
+variable "l3_out" {
+  name        = ""
+  description = "The DN of the L3 out that you want to associate with the Bridge Domain"
+}
+
+# Use the provider to assigne credentials. We use these for everything going forward.
+provider "aci" {
+  # This is the user name in ACI (usually a local users)
+  username = var.user_name
+  # The private key should be in a file on the same system referenced by path
+  private_key = var.private_key
+  # The cert name is the name assigned in ACI / Admin / AAA / Users / <User Name> / User Certificate
+  cert_name = var.cert_name
+  # The URL for ACI
+  url      = "https://${var.apic}"
+  insecure = true
+}
+
+
+locals {
   tenant_name = "Demo-Tenant"
   epg1_name   = "Demo-EPG1"
   epg2_name   = "Demo-EPG2"

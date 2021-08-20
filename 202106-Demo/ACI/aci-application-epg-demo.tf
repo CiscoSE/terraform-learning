@@ -42,7 +42,7 @@ resource "aci_application_epg" "epg2" {
 
 resource "aci_epg_to_domain" "epg2_domain" {
   application_epg_dn    = "${aci_application_epg.epg2.id}"
-  tdn                   = "${local.vmm_domain_dn}"
+  tdn                   = "${var.vmm_domain_dn}"
   instr_imedcy          = "immediate"
   res_imedcy            = "immediate"
   vmm_allow_promiscuous = "accept"

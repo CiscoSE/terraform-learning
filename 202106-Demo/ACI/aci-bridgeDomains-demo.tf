@@ -8,7 +8,7 @@ resource "aci_bridge_domain" "bridgedomain1" {
   # Assignment of the VRF
   relation_fv_rs_ctx       = "${aci_vrf.vrf1.id}"
   # Assign L3 Out
-  relation_fv_rs_bd_to_out = ["${local.l3_out}"]
+  relation_fv_rs_bd_to_out = ["${var.l3_out}"]
   # Enable ARP Flooding
   arp_flood                = "yes"
   # Enable unknown unicast packets to be flooded
@@ -21,7 +21,7 @@ resource "aci_subnet" "BD1-subnet"{
   # Parent bridge domain you are assigning the subnet to.
   parent_dn = "${aci_bridge_domain.bridgedomain1.id}"
   #Subnet being assigned to the bridge domain
-  ip        = "${local.subnet1}"
+  ip        = "${var.subnet1}"
   preferred = "yes"
   # Set if the routes can be shared between vrfs. In this case we are sharing between vrfs and externally
   scope     = ["public","shared"]
