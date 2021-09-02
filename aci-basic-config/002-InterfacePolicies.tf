@@ -7,7 +7,7 @@ locals {
   LACP_active_name    = "LACP-Active"
   LACP_active_ns_name = "LACP-Active-No-Suspend" 
   LACP_on_name        = "LACP-On"
-  LACP_mac_pinning_name = "Mac Pinning"
+  LACP_mac_pinning_name = "Mac_Pinning"
 }
 
 resource "aci_cdp_interface_policy" "CDP_enable" {
