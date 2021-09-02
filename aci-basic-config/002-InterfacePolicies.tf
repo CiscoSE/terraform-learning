@@ -7,6 +7,7 @@ locals {
   LACP_active_name    = "LACP-Active"
   LACP_active_ns_name = "LACP-Active-No-Suspend" 
   LACP_on_name        = "LACP-On"
+  LACP_mac_pinning_name = "Mac Pinning"
 }
 
 resource "aci_cdp_interface_policy" "CDP_enable" {
@@ -51,11 +52,18 @@ resource "aci_lacp_policy" "LACP_active_ns" {
   mode        = "active"
 }
 
-resource "aci_lacp_policy" "LACP_on" {
+resource "aci_lacp_policy" "Port_Channel_on" {
   name        = local.LACP_on_name
   ctrl        = ["load-defer", "graceful-conv"]
   max_links   = "16"
   min_links   = "1"
-  mode        = "active"
+  mode        = "off"
 }
 
+resource "aci_lacp_policy" "Mac_Pinning" {
+  name        = local.LACP_mac_pinning_name
+  ctrl        = []
+  max_links   = "16"
+  min_links   = "1"
+  mode        = "mac-pin"
+}
