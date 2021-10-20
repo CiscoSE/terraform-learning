@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 # Patch up Ubuntu
-RUN apt update && apt upgrade -y && \
+RUN apt update -y && apt upgrade -y && \
 	apt install curl gnupg2 software-properties-common -y
 
 # Install Terraform
@@ -10,4 +10,4 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - && \
 	apt-get install terraform -y
 
 # Things I like to have on a system, but you may not need or want.
-RUN apt install vim git screen
+RUN apt install vim git screen -y
