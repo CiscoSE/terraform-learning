@@ -3,7 +3,7 @@ terraform {
   required_providers {
     aci = {
       source = "CiscoDevNet/aci"
-      version = "0.7.0"
+      version = "0.7.1"
     }
   }
 }
@@ -50,8 +50,10 @@ provider "aci" {
 
 locals {
   tenant_name = "KC-Demo"
-  access_policy_group1 = "kc-demo-p1"
-  AEP = "aj430-infra"
+  access_policy_group1 = "kc-demo"
+  AEP = "KC-Demo"
+  domain      = "kc-demo"
+  vlan_pool   = "kc-demo"
   epg1_name   = "Demo-EPG1"
   epg2_name   = "Demo-EPG2"
   app1_name   = "Demo-APP1"
@@ -60,10 +62,6 @@ locals {
   bd1_name     = "Demo-BD-75"
 }
 
-data "aci_attachable_access_entity_profile" "AEP" {
-  name = local.AEP
-} 
-
 data "aci_lldp_interface_policy" "lldp_enabled"{
   name = "LLDP-Enabled"
 }
@@ -71,7 +69,9 @@ data "aci_lldp_interface_policy" "lldp_enabled"{
 data "aci_leaf_interface_profile" "L102"{
   name = "102"
 }
-
+data "aci_leaf_interface_profile" "L103"{
+  name = "103"
+}
 # Takes a backup of the APIC. We do this here because we want it to happen before any other changes. 
 #resource "aci_rest" "snapshot" {
 #  path = "/api/mo/uni/fabric/configexp-terraform-${timestamp()}.json"
