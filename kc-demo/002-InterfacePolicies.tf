@@ -1,5 +1,6 @@
 resource "aci_attachable_access_entity_profile" "AEP" {
   name = local.AEP
+  relation_infra_rs_dom_p = [aci_physical_domain.labsystems_physical_dom.id]
 
 }
 resource "aci_leaf_access_port_policy_group" "access_policy_Group_1" {

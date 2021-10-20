@@ -50,6 +50,8 @@ provider "aci" {
 
 locals {
   tenant_name = "KC-Demo"
+  vlan_number1 = "501"
+  vlan_number2 = "502"
   access_policy_group1 = "kc-demo"
   AEP = "KC-Demo"
   domain      = "kc-demo"
@@ -59,7 +61,8 @@ locals {
   app1_name   = "Demo-APP1"
   vrf1_name   = "demo-VRF-unenforced"
   vrf2_name   = "demo-VRF-enforced"
-  bd1_name     = "Demo-BD-75"
+  bd1_name    = "Demo-BD-1"
+  bd2_name    = "Demo-BD-2"
 }
 
 data "aci_lldp_interface_policy" "lldp_enabled"{
