@@ -9,14 +9,12 @@ terraform {
 }
 
 variable apic_auth {
-  type = (
-    {
+  type = object ({
       apic        = string
       cert_name   = string
       private_key = string
       user_name   = string
-    }
-  )
+    })
 }
 
 variable "vmm_domain_dn" {
