@@ -62,7 +62,6 @@ resource "aci_lacp_policy" "Port_Channel_on" {
 
 resource "aci_lacp_policy" "Mac_Pinning" {
   name        = local.LACP_mac_pinning_name
-  ctrl        = []
   max_links   = "16"
   min_links   = "1"
   mode        = "mac-pin"
