@@ -72,7 +72,7 @@ resource "aci_filter" "common_dns" {
 }
 
 resource "aci_filter_entry" "common_dns" {
-    name          = "dns"
+    name          = "dns_udp"
     filter_dn     = aci_filter.common_dns.id
     apply_to_frag = "no"
     ether_t       = "ip"
