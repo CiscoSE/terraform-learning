@@ -48,3 +48,35 @@ resource "aci_filter_entry" "common_web_443" {
     d_from_port   = "443"
     d_to_port     = "443"
 }
+
+# Network Time Protocol
+resource "aci_filter" "common_ntp" {
+    name          = "ntp"
+    tenant_dn     = data.aci_tenant.common.id
+}
+
+resource "aci_filter_entry" "common_ntp" {
+    name          = "ntp"
+    filter_dn     = aci_filter.common_ntp.id
+    apply_to_frag = "no"
+    ether_t       = "ip"
+    prot          = "udp"
+    d_from_port   = "123"
+    d_to_port     = "123"
+}
+
+# DNS
+resource "aci_filter" "common_dns" {
+    name          = "dns"
+    tenant_dn     = data.aci_tenant.common.id
+}
+
+resource "aci_filter_entry" "common_dns" {
+    name          = "dns"
+    filter_dn     = aci_filter.common_dns.id
+    apply_to_frag = "no"
+    ether_t       = "ip"
+    prot          = "udp"
+    d_from_port   = "53"
+    d_to_port     = "53"
+}
