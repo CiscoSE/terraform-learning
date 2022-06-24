@@ -7,15 +7,29 @@ terraform {
   }
 }
 
+variable switch1 {
+  type = object ({
+    name = string
+    url = string
+  })
+}
+
+variable switch2 {
+  type = object({
+    name = string
+    url = string
+  })
+}
+
 locals {
   leafs = [
     {
-      name = "LEAF-1"
-      url  = "https://10.82.6.23"
+      name = var.switch1.name
+      url  = var.switch1.url
     },
     {
-      name = "LEAF-2"
-      url  = "https://10.82.6.24"
+      name = var.switch2.name
+      url  = var.switch2.url
     },
   ]
 }
