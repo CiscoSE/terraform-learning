@@ -3,39 +3,11 @@ terraform {
   required_providers {
     aci = {
       source = "CiscoDevNet/aci"
-      version = "2.1.0"
+      version = "2.3.0"
     }
   }
 }
 
-variable apic_auth {
-  type = object ({
-      apic        = string
-      cert_name   = string
-      private_key = string
-      user_name   = string
-    })
-}
-
-variable "vmm_domain_dn" {
-  default        = ""
-  description = "The DN of your VMWare VMM Domain"
-}
-
-variable "subnet1" {
-  default        = ""
-  description = "This subnet is assigned to the bridge domain"
-}
-
-variable "subnet2" {
-  default        = ""
-  description = "This subnet is assigned to the bridge domain"
-}
-
-variable "l3_out" {
-  default        = ""
-  description = "The DN of the L3 out that you want to associate with the Bridge Domain"
-}
 
 # Use the provider to assigne credentials. We use these for everything going forward.
 provider "aci" {
@@ -50,16 +22,6 @@ provider "aci" {
   insecure = true
 }
 
-
-locals {
-  tenant1_name = "Sam-ESG-Demo-Tenant"
-  epg1_name   = "EPG1"  # Used for all isolated systems
-  epg2_name   = "EPG2"  # Used as a community EPG 
-  app1_name   = "APP1"
-  vrf1_name   = "SAM-ESG-Demo"
-  bd1_name    = "ESG-Demo1"
-  bd2_name    = "ESG-Demo2"
-}
 
 # Takes a backup of the APIC. We do this here because we want it to happen before any other changes. 
 #resource "aci_rest" "snapshot" {

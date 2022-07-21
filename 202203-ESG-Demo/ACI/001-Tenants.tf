@@ -1,4 +1,8 @@
+variable "tenant1_name" {
+  default = "ESG-Demo"
+}
+
 resource "aci_tenant" "tenant1" {
-  name = local.tenant1_name
+  name = var.tenant1_name
 }
 
