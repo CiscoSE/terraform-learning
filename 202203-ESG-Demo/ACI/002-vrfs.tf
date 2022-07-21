@@ -5,3 +5,8 @@ resource "aci_vrf" "vrf1a" {
   ip_data_plane_learning = "enabled"
 }
 
+resource "aci_vrf" "commonDemo"{
+  name			= "Sam-Demo-VRF"
+  tenant_dn		= data.aci_tenant.common.id
+}
+

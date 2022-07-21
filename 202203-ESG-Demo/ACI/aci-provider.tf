@@ -57,7 +57,8 @@ locals {
   epg2_name   = "EPG2"  # Used as a community EPG 
   app1_name   = "APP1"
   vrf1_name   = "SAM-ESG-Demo"
-  bd1_name     = "ESG-Demo"
+  bd1_name    = "ESG-Demo1"
+  bd2_name    = "ESG-Demo2"
 }
 
 # Takes a backup of the APIC. We do this here because we want it to happen before any other changes. 
