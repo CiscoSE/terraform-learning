@@ -16,3 +16,10 @@ resource "aci_endpoint_security_group" "esg1"{
         match_t = "AtleastOne"
     }
 }
+
+resource "aci_endpoint_security_group_tag_selector" "esg1_selector1"{
+  endpoint_security_group_dn = aci_endpoint_security_group.esg1.id
+  match_key = "fvEpIpTag"
+  match_value = "10.82.9.162"
+  value_operator = "equals"
+}
