@@ -22,6 +22,8 @@ resource "aci_bridge_domain" "bd1" {
     tenant_dn = aci_tenant.tenant1.id
     relation_fv_rs_ctx = aci_vrf.vrf1a.id
     relation_fv_rs_bd_to_out = [var.l3_out_dn]
+    arp_flood = "yes"
+    unk_mac_ucast_act = "flood"
 }
 
 resource "aci_bridge_domain" "bd2" {
@@ -29,6 +31,8 @@ resource "aci_bridge_domain" "bd2" {
     tenant_dn = aci_tenant.tenant1.id
     relation_fv_rs_ctx = aci_vrf.vrf1a.id
     relation_fv_rs_bd_to_out = [var.l3_out_dn]
+    arp_flood = "yes"
+    unk_mac_ucast_act = "flood"
 }
 
 resource "aci_subnet" "subnet1" {
