@@ -6,6 +6,7 @@ variable "esg1_name" {
 resource "aci_endpoint_security_group" "esg1"{
     application_profile_dn = aci_application_profile.app1.id
     name = var.esg1_name
+    relation_fv_rs_scope = aci_vrf.vrf1a.id
     relation_fv_rs_cons {
       prio = "unspecified"
       target_dn = aci_contract.icmp.id
@@ -17,9 +18,15 @@ resource "aci_endpoint_security_group" "esg1"{
     }
 }
 
-resource "aci_endpoint_security_group_tag_selector" "esg1_selector1"{
+resource "aci_endpoint_security_group_epg_selector" "esg1_epg_select1" {
   endpoint_security_group_dn = aci_endpoint_security_group.esg1.id
-  match_key = "fvEpIpTag"
-  match_value = "10.82.9.162"
-  value_operator = "equals"
+  match_epg_dn = aci_application_epg.epg1.id
 }
+
+
+#resource "aci_endpoint_security_group_tag_selector" "esg1_selector1"{
+#  endpoint_security_group_dn = aci_endpoint_security_group.esg1.id
+#  match_key = "fvEpIpTag"
+#  match_value = "10.82.9.162"
+#  value_operator = "equals"
+#}
