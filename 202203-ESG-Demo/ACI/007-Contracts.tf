@@ -1,4 +1,6 @@
 # In many cases you are going to change these in TFVARS before you run this, but I try to provide some relatively safe options
+
+# These filters will be used within the below created contracts to allow traffic in and out the L3 out.
 variable "icmp_filter_name" {
   default       = "f_demo_icmp"
   description   = "Filter we use to allow ICMP traffic in the demo"
@@ -9,6 +11,7 @@ variable "ssh_filter_name" {
   description   = "Filter we use to allow ssh traffic in the demo"
 }
 
+# These contracts use the above filters to white list traffic in the fabric. 
 variable "icmp_contract_name" {
   default       = "c_demo_icmp"
   description   = "Contract we use to allow ICMP traffic in the demo"
@@ -21,7 +24,7 @@ variable "ssh_contract_name" {
 
 ############### Start SSH Contact and filter ############
 resource "aci_contract" "ssh" {
-    tenant_dn = data.aci_tenant.common.id
+    tenant_dn = data.aci_tenant.l3out_tenant.id
     name = var.ssh_contract_name
     scope = "global"
 }
@@ -40,7 +43,7 @@ resource "aci_contract_subject_filter" "ssh_subj_filter" {
 }
 
 resource "aci_filter" "ssh" {
-    tenant_dn = data.aci_tenant.common.id
+    tenant_dn = data.aci_tenant.l3out_tenant.id
     name = var.ssh_filter_name
 }
 
@@ -55,7 +58,7 @@ resource "aci_filter_entry" "ssh_e1" {
 
 ############### Start ICMP Contact and filter ############
 resource "aci_contract" "icmp" {
-    tenant_dn = data.aci_tenant.common.id
+    tenant_dn = data.aci_tenant.l3out_tenant.id
     name = var.icmp_contract_name
     scope = "global"
 }
@@ -73,7 +76,7 @@ resource "aci_contract_subject_filter" "icmp_subj_filter" {
 }
 
 resource "aci_filter" "icmp" {
-    tenant_dn = data.aci_tenant.common.id
+    tenant_dn = data.aci_tenant.l3out_tenant.id
     name = var.icmp_filter_name
 }
 

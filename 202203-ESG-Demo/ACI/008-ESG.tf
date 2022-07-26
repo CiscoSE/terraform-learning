@@ -18,15 +18,26 @@ resource "aci_endpoint_security_group" "esg1"{
     }
 }
 
-resource "aci_endpoint_security_group_epg_selector" "esg1_epg_select1" {
+resource "aci_endpoint_security_group_tag_selector" "esg1_selector1"{
   endpoint_security_group_dn = aci_endpoint_security_group.esg1.id
-  match_epg_dn = aci_application_epg.epg1.id
+  match_key = "esg"
+  match_value = "esg1"
+  value_operator = "equals"
+}
+
+resource "aci_rest_managed" "leakSubnet1" {
+  dn         = "${aci_vrf.vrf1a.id}/leakroutes/leakintsubnet-[${var.subnet1}]"
+  class_name = "leakInternalSubnet"
+  content = {
+    ip    = var.subnet1
+    scope = "public"
+  }
 }
 
 
-#resource "aci_endpoint_security_group_tag_selector" "esg1_selector1"{
+
+# Keeping this in here because it might be useful to someone who wants to leak by EPG instead of TAG.
+#resource "aci_endpoint_security_group_epg_selector" "esg1_epg_select1" {
 #  endpoint_security_group_dn = aci_endpoint_security_group.esg1.id
-#  match_key = "fvEpIpTag"
-#  match_value = "10.82.9.162"
-#  value_operator = "equals"
+#  match_epg_dn = aci_application_epg.epg1.id
 #}

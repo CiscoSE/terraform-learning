@@ -7,14 +7,22 @@ variable "bd2_name" {
 }
 
 
-variable "subnet1" {
+variable "gateway1" {
   default        = ""
   description = "This subnet is assigned to the bridge domain"
 }
 
-variable "subnet2" {
+variable "gateway2" {
   default        = ""
   description = "This subnet is assigned to the bridge domain"
+}
+
+variable "subnet1"{
+    default     = ""
+}
+
+variable "subnet2"{
+    default     = ""
 }
 
 resource "aci_bridge_domain" "bd1" {
@@ -37,12 +45,12 @@ resource "aci_bridge_domain" "bd2" {
 
 resource "aci_subnet" "subnet1" {
     parent_dn = aci_bridge_domain.bd1.id
-    ip        = var.subnet1
+    ip        = var.gateway1
     scope     = ["shared","public"]
 }
 
 resource "aci_subnet" "subnet2" {
     parent_dn = aci_bridge_domain.bd2.id
-    ip        = var.subnet2
+    ip        = var.gateway2
     scope     = ["shared","public"]
 }
