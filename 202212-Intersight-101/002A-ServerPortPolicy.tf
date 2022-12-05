@@ -5,10 +5,14 @@ resource "intersight_fabric_port_policy" "fabric_port_policy1" {
     moid        = data.intersight_organization_organization.org1.id
     object_type = "organization.Organization"
   }
-  tags {
-    key   = var.domain.tag_key1
-    value = var.domain.tag_value1
+  dynamic "profiles" {
+    for_each = intersight_fabric_switch_profile.fabric_switch_profile1
+    content {
+      moid        = profiles.value.moid
+      object_type = profiles.value.object_type
+    }
   }
+  tags = [var.tags]
   depends_on = [data.intersight_organization_organization.org1]
 }
 
@@ -21,8 +25,5 @@ resource "intersight_fabric_server_role" "fabric_server_role1" {
   port_policy {
     moid = intersight_fabric_port_policy.fabric_port_policy1.moid
   }
-  tags {
-    key   = var.domain.tag_key1
-    value = var.domain.tag_value1
-  }  
+  tags = [var.tags]
 }

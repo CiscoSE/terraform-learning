@@ -1,5 +1,5 @@
 resource "intersight_fabric_switch_cluster_profile" "fabric_switch_cluster_profile1" {
-  name        = "${var.domain.org_name}_cluster_profile"
+  name        = "${var.domain.org_name}_UCS_Domain_profile"
   type        = "instance"
   organization {
     object_type = "organization.Organization"
@@ -8,18 +8,13 @@ resource "intersight_fabric_switch_cluster_profile" "fabric_switch_cluster_profi
 }
 
 resource "intersight_fabric_switch_profile" "fabric_switch_profile1" {
-  name        = "${var.domain.org_name}_switch_profile"
+  for_each    = toset(["A", "B"])
+  
+  name        = "${var.domain.org_name}_switch_profile${each.key}"
   type        = "instance"
-  action      = "No-op"
-  #policy_bucket { # System QoS Policy
-  #  moid        = intersight_fabric_system_qos_policy.Fabric_System_QOS.moid
-  #  object_type = intersight_fabric_system_qos_policy.Fabric_System_QOS.object_type
-  #}
+  
   switch_cluster_profile {
     moid        = intersight_fabric_switch_cluster_profile.fabric_switch_cluster_profile1.moid
     object_type = "fabric.SwitchClusterProfile"
   }
-  depends_on = [
-    intersight_fabric_switch_cluster_profile.fabric_switch_cluster_profile1
-  ]
 }

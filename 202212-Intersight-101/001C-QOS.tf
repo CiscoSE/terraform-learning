@@ -52,12 +52,16 @@ resource "intersight_fabric_system_qos_policy" "Fabric_System_QOS" {
         class_id        = "fabric.QosClass"
         object_type     = "fabric.QosClass"
     }
+    dynamic "profiles" {
+        for_each = intersight_fabric_switch_profile.fabric_switch_profile1
+        content {
+            moid        = profiles.value.moid
+            object_type = profiles.value.object_type
+        }
+    }
     organization {
         moid        = data.intersight_organization_organization.org1.id
         object_type = "organization.Organization"
     }
-    tags {
-        key   = var.domain.tag_key1
-        value = var.domain.tag_value1
-    }
+    tags = [var.tags]
 }

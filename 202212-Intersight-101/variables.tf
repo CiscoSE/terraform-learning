@@ -8,11 +8,8 @@ variable "connection" {
 
 variable "domain" {
     type = object({
-        tag_key1            = string
-        tag_value1          = string
         ntp_policy_name     = string
         ntp1                = string
-        time_zone           = string
         qos_policy_name     = string
         best_effort_qos_mtu = number
         org_name            = string
@@ -22,4 +19,22 @@ variable "servers" {
     type = object({
         server_ports = set(string)
     })
+}
+
+variable "tags" {
+    type = object ({
+        additional_properties = string
+        key = string
+        value = string
+    })
+}
+
+variable "ntp_timezone" {
+  type = map(string)
+  default = {
+    us_eastern  = "America/New_York"
+    us_central  = "America/Chicago"
+    us_mountain = "America/Denver"
+    us_pacific  = "America/Los_Angeles"
+  }
 }
