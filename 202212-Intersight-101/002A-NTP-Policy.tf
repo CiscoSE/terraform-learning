@@ -4,7 +4,7 @@ resource "intersight_ntp_policy" "ntp1" {
   ntp_servers = [var.domain.ntp1]
   timezone = var.domain.time_zone
   organization {
-    moid   = data.intersight_organization_organization.org1.moid
+    moid   = data.intersight_organization_organization.org1.id
     object_type = "organization.Organization"
   }
   tags {

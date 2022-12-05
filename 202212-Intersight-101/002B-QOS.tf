@@ -53,7 +53,7 @@ resource "intersight_fabric_system_qos_policy" "Fabric_System_QOS" {
         object_type     = "fabric.QosClass"
     }
     organization {
-        moid        = data.intersight_organization_organization.org1.moid
+        moid        = data.intersight_organization_organization.org1.id
         object_type = "organization.Organization"
     }
     tags {

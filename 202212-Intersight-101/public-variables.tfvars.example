@@ -42,3 +42,9 @@ domain = {
         qos_policy_name     = "Your-QOS-Policy Name"
         best_effort_qos_mtu = "9215" # The maximum MTU the fabric interconnects will support.
 }
+
+servers = {
+    # Start at 17 and 18 to allow for FC ports in the future, 
+    # but you could assing any ports as server ports.
+    server_ports = ["17","18"]
+}

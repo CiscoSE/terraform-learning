@@ -18,3 +18,8 @@ variable "domain" {
         org_name            = string
     })
 }
+variable "servers" {
+    type = object({
+        server_ports = set(string)
+    })
+}
