@@ -33,18 +33,38 @@ connection = {
 }
 
 domain = {
-        org_name            = "Your-Org"
-        tag_value1          = "Your-Tag"
-        tag_key1            = "Your-Tag-Key"
-        ntp_policy_name     = "Your-NTP-Policy-Name"
-        ntp1                = "1.1.1.1" # Enter the IP of your Time Server
-        time_zone           = "America/New_York"
-        qos_policy_name     = "Your-QOS-Policy Name"
-        best_effort_qos_mtu = "9215" # The maximum MTU the fabric interconnects will support.
+        org_name            = "Sam-Demo"
+        ntp_policy_name     = "AJ429-NTP-10.82.9.0"
+        ntp1                = "1.1.1.1"
+        qos_policy_name     = "Sam-Demo-QOS"
+        best_effort_qos_mtu = "9215"
 }
 
+# This tag will get assigned to everything we create. 
+tags = {
+    additional_properties = ""
+    key   = "PolicyGroup"
+    value = "SomethingUnique"
+}
+
+# Designate server ports in this list. 
 servers = {
-    # Start at 17 and 18 to allow for FC ports in the future, 
-    # but you could assing any ports as server ports.
     server_ports = ["17","18"]
+}
+
+# These are the uplink ports to be used in the port channel.
+uplinks = {
+    uplink_ports = ["47","48"]
+}
+
+# VLANs You want created on the fabric interconnects in support of uplinks get added here 
+uplink_VLANS = {
+  "VLAN-1001" = {
+    qos = "be"
+    vlan = 1001
+  }
+  "VLAN0-1002" = {
+    qos = "be"
+    vlan = 1002
+  }
 }

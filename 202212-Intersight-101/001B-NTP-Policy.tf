@@ -1,5 +1,5 @@
 resource "intersight_ntp_policy" "ntp1" {
-  name    = var.domain.ntp_policy_name
+  name    = "${var.domain.policy_prefix}-NTP"
   enabled = true
   ntp_servers = [var.domain.ntp1]
   timezone = var.ntp_timezone.us_eastern

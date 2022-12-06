@@ -6,7 +6,7 @@
 #
 ###################################################################################
 resource "intersight_fabric_port_policy" "port_configuration" {
-  name         = "${var.domain.org_name}-portPolicy"
+  name         = "${var.domain.policy_prefix}-portPolicy"
   device_model = "UCS-FI-6454"
   organization {
     moid        = data.intersight_organization_organization.org1.id
@@ -32,7 +32,6 @@ resource "intersight_fabric_port_policy" "port_configuration" {
 resource "intersight_fabric_server_role" "fabric_serverPorts" {
   for_each = var.servers.server_ports
 
-  aggregate_port_id = 0
   port_id           = each.value
   slot_id           = 1
   port_policy {

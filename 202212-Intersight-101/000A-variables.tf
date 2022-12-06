@@ -8,9 +8,8 @@ variable "connection" {
 
 variable "domain" {
     type = object({
-        ntp_policy_name     = string
         ntp1                = string
-        qos_policy_name     = string
+        policy_prefix       = string
         best_effort_qos_mtu = number
         org_name            = string
     })

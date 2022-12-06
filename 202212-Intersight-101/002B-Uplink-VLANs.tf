@@ -1,5 +1,5 @@
 resource "intersight_fabric_eth_network_policy" "fabric_vlans" {
-  name = "${var.domain.org_name}-Fabric-VLANS"
+  name = "${var.domain.policy_prefix}-Fabric-VLANS"
   tags = [var.tags]
   organization {
     moid = data.intersight_organization_organization.org1.id
@@ -17,7 +17,7 @@ resource "intersight_fabric_eth_network_policy" "fabric_vlans" {
 }
 
 resource "intersight_fabric_multicast_policy" "default" {
-  name = "${var.domain.org_name}-Multicast-Default"
+  name = "${var.domain.policy_prefix}-Multicast-Default"
   tags = [var.tags]
   organization {
     moid = data.intersight_organization_organization.org1.id

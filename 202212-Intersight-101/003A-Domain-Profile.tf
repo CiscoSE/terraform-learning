@@ -1,6 +1,7 @@
 resource "intersight_fabric_switch_cluster_profile" "fabric_switch_cluster_profile1" {
-  name        = "${var.domain.org_name}_UCS_Domain_profile"
+  name        = "${var.domain.policy_prefix}_UCS_Domain_profile"
   type        = "instance"
+  tags        = [var.tags]
   organization {
     object_type = "organization.Organization"
     moid        = data.intersight_organization_organization.org1.id

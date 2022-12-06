@@ -1,7 +1,7 @@
 # If you do not specify all of the policies, it will complicate reapplying the policy later. Recommend you
 # determine the preferred configuration for each policy or accept these defaults.
 resource "intersight_fabric_system_qos_policy" "Fabric_System_QOS" {
-    name = var.domain.qos_policy_name
+    name = "${var.domain.policy_prefix}-QOS"
     classes  {
         admin_state     = "Enabled"
         name            = "Best Effort" 
