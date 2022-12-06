@@ -33,10 +33,9 @@ connection = {
 }
 
 domain = {
-        org_name            = "Sam-Demo"
-        ntp_policy_name     = "AJ429-NTP-10.82.9.0"
+        org_name            = "YourExistingOrg"
+        policy_prefix       = "PolicyNamePrefix"
         ntp1                = "1.1.1.1"
-        qos_policy_name     = "Sam-Demo-QOS"
         best_effort_qos_mtu = "9215"
 }
 
