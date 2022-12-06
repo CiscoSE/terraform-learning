@@ -62,7 +62,7 @@ uplink_VLANS = {
     qos = "be"
     vlan = 1001
   }
-  "VLAN0-1002" = {
+  "VLAN-1002" = {
     qos = "be"
     vlan = 1002
   }
