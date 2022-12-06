@@ -21,6 +21,19 @@ variable "servers" {
     })
 }
 
+variable "uplinks" {
+    type = object({
+        uplink_ports = set(string)
+    })
+}
+
+variable "uplink_VLANS" {
+  type = map(object({
+    vlan = optional(number)
+    qos  = optional(string)
+  }))
+}
+
 variable "tags" {
     type = object ({
         additional_properties = string
@@ -38,3 +51,4 @@ variable "ntp_timezone" {
     us_pacific  = "America/Los_Angeles"
   }
 }
+
