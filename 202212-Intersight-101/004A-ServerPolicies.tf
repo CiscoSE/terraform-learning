@@ -71,3 +71,19 @@ resource "intersight_power_policy" "PowerPolicy1" {
   power_profiling     = "Enabled"
   power_save_mode     = "Enabled"
 }
+
+##################################################################################
+# VMedia Policy
+##################################################################################
+
+resource "intersight_vmedia_policy" "vmedia1" {
+  name = "${var.domain.policy_prefix}-vMedia"
+  tags = [var.tags]
+  organization {
+    object_type = "organization.Organization"
+    moid = data.intersight_organization_organization.org1.id
+  }
+  enabled     = true
+  encryption  = true
+
+}
