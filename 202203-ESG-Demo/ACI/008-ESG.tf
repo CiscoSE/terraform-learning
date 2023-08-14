@@ -3,9 +3,28 @@ variable "esg1_name" {
     default     = "demo_esg1"
 }
 
+variable "esg2_name" {
+    default     = "demo_esg2"
+}
+
 resource "aci_endpoint_security_group" "esg1"{
     application_profile_dn = aci_application_profile.app1.id
     name = var.esg1_name
+    relation_fv_rs_scope = aci_vrf.vrf1a.id
+    relation_fv_rs_cons {
+      prio = "unspecified"
+      target_dn = aci_contract.icmp.id
+    }
+    relation_fv_rs_prov{
+        prio = "unspecified"
+        target_dn = aci_contract.ssh.id
+        match_t = "AtleastOne"
+    }
+}
+
+resource "aci_endpoint_security_group" "esg2"{
+    application_profile_dn = aci_application_profile.app1.id
+    name = var.esg2_name
     relation_fv_rs_scope = aci_vrf.vrf1a.id
     relation_fv_rs_cons {
       prio = "unspecified"
@@ -32,6 +51,7 @@ resource "aci_rest_managed" "leakSubnet1" {
     ip    = var.subnet1
     scope = "public"
   }
+  depends_on = [aci_subnet.subnet1]
 }
 
 
