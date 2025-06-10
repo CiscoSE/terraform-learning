@@ -1,0 +1,5 @@
+202203-ESG-Demo/ACI/.terraform.lock.hcl
+202203-ESG-Demo/ACI/private.variables.tfvars
+202203-ESG-Demo/ACI/.terraform/*
+202203-ESG-Demo/ACI/terraform.tfstate
+202203-ESG-Demo/ACI/terraform.tfstate.backup
