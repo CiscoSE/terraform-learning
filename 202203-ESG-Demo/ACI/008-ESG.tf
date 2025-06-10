@@ -25,14 +25,16 @@ resource "aci_endpoint_security_group_tag_selector" "esg1_selector1"{
   value_operator = "equals"
 }
 
-resource "aci_rest_managed" "leakSubnet1" {
-  dn         = "${aci_vrf.vrf1a.id}/leakroutes/leakintsubnet-[${var.subnet1}]"
-  class_name = "leakInternalSubnet"
-  content = {
-    ip    = var.subnet1
-    scope = "public"
-  }
-}
+# Removed because I need to fix this. Change in implementation since this was written.
+
+#resource "aci_rest_managed" "leakSubnet1" {
+#  dn         = "${aci_vrf.vrf1a.id}/leakroutes/leakintsubnet-[${var.subnet1}]"
+#  class_name = "leakInternalSubnet"
+#  content = {
+#    ip    = var.subnet1
+#    scope = "public"
+#  }
+#}
 
 
 

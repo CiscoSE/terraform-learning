@@ -1,22 +1,22 @@
-# This demo assumes that you are using the common tenant and the default vrf for your L3 out. 
+# This demo assumes that you are using the common tenant and the default vrf for your L3 out.
 
 variable "L3out_tenant" {
-  default = "common" 
+  default = "common"
 }
 
 variable "L3out_vrf" {
   default = "default"
 }
 
-# We assume you have a default route in your L3 out already. You may have to create a static or 
+# We assume you have a default route in your L3 out already. You may have to create a static or
 # leak an existing route being learned externally in order for this to work.
 
 variable "leak_route" {
   default = "0.0.0.0/0"
-  
+
 }
 
-# This creates a read only reference to the tenant. 
+# This creates a read only reference to the tenant.
 data "aci_tenant" "l3out_tenant" {
   name  = var.L3out_tenant
 }
@@ -44,16 +44,18 @@ resource "aci_rest_managed" "leak_subnet1" {
   content = {
     ip = "${var.leak_route}"
   }
-} 
+}
 
-resource "aci_rest_managed" "leakTo" {
-  depends_on = [
-    aci_rest_managed.leak_subnet1
-  ]
-  dn           = "${data.aci_vrf.l3out_vrf.id}/leakroutes/leakextsubnet-[${var.leak_route}]/to-[${var.tenant1_name}]-[${var.vrf1_name}]"
-  class_name   = "leakTo"
-  content = {
-    tenantName = var.tenant1_name
-    ctxName    = var.vrf1_name
-  }
-} 
+# Removed because I need to fix this. Change in implementation since this was written.
+
+#resource "aci_rest_managed" "leakTo" {
+#  depends_on = [
+#    aci_rest_managed.leak_subnet1
+#  ]
+#  dn           = "${data.aci_vrf.l3out_vrf.id}/leakroutes/leakextsubnet-[${var.leak_route}]/to-[${var.tenant1_name}]-[${var.vrf1_name}]"
+#  class_name   = "leakTo"
+#  content = {
+#    tenantName = var.tenant1_name
+#    ctxName    = var.vrf1_name
+#  }
+#}
