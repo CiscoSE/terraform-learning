@@ -9,7 +9,6 @@ resource "aci_epg_to_contract" "ssh_out" {
   contract_dn        = aci_contract.ssh.id
   contract_type      = "consumer"
   annotation         = "terraform"
-  match_t            = "AtleastOne"
   prio               = "unspecified"
 }
 
