@@ -5,6 +5,7 @@
 variable "epg1_name" {
   default = "demo-epg1"
 }
+
 variable "epg2_name" {
   default = "demo-epg2"
 }
